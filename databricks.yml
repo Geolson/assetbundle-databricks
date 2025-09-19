@@ -21,13 +21,17 @@ targets:
       source_linked_deployment: false
     workspace:
       host: https://dbc-ff60ac3a-4ae1.cloud.databricks.com/
+    variables:
+      env: dev
 
   prod:
     mode: production
     workspace:
       host: https://dbc-ff60ac3a-4ae1.cloud.databricks.com/
       # We explicitly deploy to /Workspace/Users/arul1020253@gmail.com to make sure we only have a single copy.
-      root_path: /Workspace/Users/arul1020253@gmail.com/PROD/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Users/arul1020253@gmail.com/assetbundle-databricks-prod/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      env: prod
     permissions:
       - group_name: admins
         level: CAN_MANAGE
