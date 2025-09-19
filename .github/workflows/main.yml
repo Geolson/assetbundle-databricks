@@ -2,17 +2,40 @@ name: CI
 
 on:
   push:
-    paths-ignore:
-      - .github
     branches:
-      - main
-      #- dev   # also trigger on dev branch if needed
+      - main   # Only trigger when code is merged to main
 
 jobs:
-  deploy:
+  deploy-dev:
     runs-on: ubuntu-latest
     environment: development
+    env:
+      DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
+      DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
+      REPO_PATH: /Workspace/Users/arul1020253@gmail.com/git-cicd/assetbundle-databricks
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Deploy to Dev (main branch)
+        run: |
+          echo "Deploying DEV environment on branch main"
+          databricks repos update ${{ env.REPO_PATH }} --branch "main"
+          databricks bundle deploy --target dev
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs: deploy-dev    # deployment started only dev got succeded
+    environment: production
     env:
       DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
       DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
@@ -30,18 +53,8 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Extract branch name
-        id: extract_branch
-        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-
-      - name: Update Databricks Git folder
+      - name: Deploy to Prod (after Dev)
         run: |
-          echo "Deploying branch: ${{ steps.extract_branch.outputs.branch }}"
-          databricks repos update ${{ env.REPO_PATH }} --branch "${{ steps.extract_branch.outputs.branch }}"
-
-      # Optional: build and upload wheel file to DBFS
-      # - name: Build Wheel and Upload
-      #   run: |
-      #     pip install setuptools wheel
-      #     python setup.py bdist_wheel
-      #     dbfs cp --overwrite ./dist/* dbfs:/FileStore/jars/
+          echo "Deploying PROD environment on branch main"
+          databricks repos update ${{ env.REPO_PATH }} --branch "main"
+          databricks bundle deploy --target prod
