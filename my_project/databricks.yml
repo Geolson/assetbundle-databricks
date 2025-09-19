@@ -17,7 +17,7 @@ targets:
     mode: development
     default: true
     presets:
-      name_prefix: dev_${workspace.current_user.short_name}
+      name_prefix: dev_local_${workspace.current_user.short_name}
       source_linked_deployment: false
     workspace:
       host: https://dbc-ff60ac3a-4ae1.cloud.databricks.com/
