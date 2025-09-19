@@ -1,5 +1,5 @@
 # This is a Databricks asset bundle definition for my_project.
-# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation
 bundle:
   name: my_project
   uuid: 53b28b76-9ef8-4f94-a8fc-28c4db60339e
@@ -17,17 +17,24 @@ targets:
     mode: development
     default: true
     presets:
-      name_prefix: dev_local_${workspace.current_user.short_name}
+      name_prefix: ${workspace.current_user.short_name}_
       source_linked_deployment: false
     workspace:
       host: https://dbc-ff60ac3a-4ae1.cloud.databricks.com/
+    variables:
+      env: dev
 
   prod:
     mode: production
     workspace:
       host: https://dbc-ff60ac3a-4ae1.cloud.databricks.com/
       # We explicitly deploy to /Workspace/Users/arul1020253@gmail.com to make sure we only have a single copy.
-      root_path: /Workspace/Users/arul1020253@gmail.com/PROD/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Users/arul1020253@gmail.com/git-cicd/assetbundle-databricks-prod/.bundle/${bundle.name}/${bundle.target}
+    presets:
+      name_prefix: ${workspace.current_user.short_name}_
+      source_linked_deployment: false
+    variables:
+      env: prod
     permissions:
       - group_name: admins
         level: CAN_MANAGE

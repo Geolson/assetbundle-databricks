@@ -1,13 +1,13 @@
 resources:
   jobs:
     new_job:
-      name: new_job
+      name: job_${var.env}
       tasks:
         - task_key: online-injestion
           notebook_task:
             notebook_path: ../../src/notebooks/injestion.ipynb
             base_parameters:
-              calalog_name: ${var.calalog_name}
+              calalog_name: ${var.catalog_name}
             source: WORKSPACE
       queue:
         enabled: true

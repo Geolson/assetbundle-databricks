@@ -1,4 +1,9 @@
 variables:
-  calalog_name:
+  catalog_name:
     description: The ID of an existing cluster.
     default: assetbundles
+
+  env:
+    type: string
+    description: Environment name (dev/prod)
+    default: dev   # fallback if not overridden
