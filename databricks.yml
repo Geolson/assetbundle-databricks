@@ -36,5 +36,5 @@ targets:
     variables:
       env: prod
     permissions:
-      - user_name: arul1020253@gmail.com
+      - group_name: admins
         level: CAN_MANAGE
