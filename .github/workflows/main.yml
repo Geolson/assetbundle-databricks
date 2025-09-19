@@ -16,7 +16,7 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
       DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-      REPO_PATH: /Workspace/Users/arul1020253@gmail.com/git-cicd/assetbundle-databricks
+      REPO_PATH: /Workspace/Users/arul1020253@gmail.com/git-cicd/assetbundle-databricks-prod
 
     steps:
       - name: Checkout repository
