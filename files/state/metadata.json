@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "config": {
+    "bundle": {
+      "git": {
+        "branch": "main",
+        "origin_url": "https://github.com/Geolson/assetbundle-databricks",
+        "commit": "7ae3366d220e36fb25af0fdc3ac728dd572146ba",
+        "bundle_root_path": "."
+      }
+    },
+    "workspace": {
+      "file_path": "/Workspace/Users/arul1020253@gmail.com/git-cicd/assetbundle-databricks/files"
+    },
+    "resources": {
+      "jobs": {
+        "new_job": {
+          "id": "1024474780535101",
+          "relative_path": "resources/jobs/injestion_job.yml"
+        }
+      }
+    }
+  }
+}

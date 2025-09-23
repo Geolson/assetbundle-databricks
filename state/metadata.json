@@ -5,7 +5,7 @@
       "git": {
         "branch": "main",
         "origin_url": "https://github.com/Geolson/assetbundle-databricks",
-        "commit": "7ae3366d220e36fb25af0fdc3ac728dd572146ba",
+        "commit": "58fd58778092dd0421794cc8107a77ef4586352e",
         "bundle_root_path": "."
       }
     },
@@ -15,7 +15,7 @@
     "resources": {
       "jobs": {
         "new_job": {
-          "id": "1024474780535101",
+          "id": "257066506516865",
           "relative_path": "resources/jobs/injestion_job.yml"
         }
       }
