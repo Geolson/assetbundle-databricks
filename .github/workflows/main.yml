@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main   # Only trigger when code is merged to main
+      - main   # Only trigger when code is merged to mainw
 
 jobs:
   deploy-dev:
